@@ -1,0 +1,8 @@
+{
+    "environments": {
+        "dev": {
+            "DEBUG": true
+        }
+    },
+    "active": "dev"
+}

@@ -1,0 +1,39 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/__pycache__": true
+		}
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Python: Current File",
+				"type": "python",
+				"request": "launch",
+				"program": "${file}",
+				"console": "integratedTerminal"
+			},
+			{
+				"name": "manage run",
+				"type": "python",
+				"request": "launch",
+				"program": "${workspaceFolder}/manage.py",
+				"args" : ["run"],
+				"justMyCode": true
+			},
+			{
+				"name": "pytest",
+				"type": "python",
+				"request": "launch",
+				"module": "pytest",
+				"justMyCode": true
+			}
+		]
+	}
+}
