@@ -253,6 +253,6 @@ _meta
 app/main/*.db
 
 #overwrite config file
-# flask-config-overwrite.json
+flask-config-overwrite.json
 #workspace file
-# *.code-workspace
+*.code-workspace
