@@ -1,0 +1,35 @@
+app:
+  events:
+  - http: ANY /
+  - http: ANY {proxy+}
+  - http:
+      cors:
+        allowCredentials: 'true'
+        headers:
+        - Content-Type
+        - Authorization
+        - X-Amz-Date
+        - X-Api-Key
+        - X-Amz-Security-Token
+        - X-Amz-User-Agent
+        - client-session
+        - client-id
+        origin: '*'
+      method: post
+      path: data-errors
+  - http:
+      cors:
+        allowCredentials: 'true'
+        headers:
+        - Content-Type
+        - Authorization
+        - X-Amz-Date
+        - X-Api-Key
+        - X-Amz-Security-Token
+        - X-Amz-User-Agent
+        - client-session
+        - client-id
+        origin: '*'
+      method: post
+      path: feedback
+  handler: wsgi_handler.handler
