@@ -1,14 +1,7 @@
 {
     "environments": {
         "dev": {
-            "DEBUG": true,
-            "AWS_REGION": "",
-            "AWS_PROFILE": "",
-            "DATA_ERROR_TOPIC_ARN": "",
-            "DATA_ERROR_EMAIL_SUBJECT": "",
-            "DYNAMODB_TABLE_DATA_ERROR": "",
-            "GITHUB_TOKEN": "",
-            "GITHUB_REPO": ""
+            "DEBUG": true
         }
     },
     "active": "dev"
