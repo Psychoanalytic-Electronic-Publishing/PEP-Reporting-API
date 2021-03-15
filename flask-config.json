@@ -1,17 +1,19 @@
 {
     "default":
     {
-        "DEBUG": true,
-        "TESTING": false,
-        "PRESERVE_CONTEXT_ON_EXCEPTION": false,
-        "PROPAGATE_EXCEPTIONS": true,
+        "DEBUG": "true",
+        "TESTING": "false",
+        "PRESERVE_CONTEXT_ON_EXCEPTION": "false",
+        "PROPAGATE_EXCEPTIONS": "true",
         "DYNAMODB_TABLE_DATA_ERROR": "",
         "DATA_ERROR_TOPIC_ARN": "test",
-        "DATA_ERROR_EMAIL_SUBJECT": "test"
+        "DATA_ERROR_EMAIL_SUBJECT": "test",
+        "GITHUB_LABELS": "",
+        "GITHUB_ASSIGNEES": ""
     },
     "local":
     {
-        "USE_ENCRYPTION": false,
+        "USE_ENCRYPTION": "false",
         "AWS_PROFILE":""
     },
     "dev":
@@ -22,18 +24,18 @@
     },
     "unittests":
     {
-        "DEBUG": false,
-        "TESTING": true,
-        "USE_ENCRYPTION": false,
+        "DEBUG": "false",
+        "TESTING": "true",
+        "USE_ENCRYPTION": "false",
         "DATA_ERROR_TOPIC_ARN": "test",
         "DATA_ERROR_EMAIL_SUBJECT": "test"
     },
     "staging":
     {
-        "DEBUG": false
+        "DEBUG": "false"
     },
     "production":
     {
-        "DEBUG": false
+        "DEBUG": "false"
     }
 }
