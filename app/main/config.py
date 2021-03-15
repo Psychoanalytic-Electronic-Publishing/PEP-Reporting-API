@@ -111,8 +111,8 @@ class ConfigValues:
         return value
 
     def __string_to_bool(self, value: str) -> bool:
-        return bool(util.strtobool(value))
+        return value if value is None or isinstance(value, (bool)) else bool(util.strtobool(value))
 
     def __string_to_list(self, value: str) -> list:
-        values = [v.strip() for v in value.split(',')]
-        return values if '' not in values[:1] else []
+        return value if value is None else [v.strip() for v in value.split(',') if v.strip()] # removes any empty strings
+
