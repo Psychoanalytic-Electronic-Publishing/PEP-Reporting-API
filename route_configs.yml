@@ -14,7 +14,7 @@ app:
         - X-Amz-User-Agent
         - client-session
         - client-id
-        origin: '*'
+        origin: null
       method: post
       path: data-errors
   - http:
@@ -29,7 +29,7 @@ app:
         - X-Amz-User-Agent
         - client-session
         - client-id
-        origin: '*'
+        origin: null
       method: post
       path: feedback
   handler: wsgi_handler.handler

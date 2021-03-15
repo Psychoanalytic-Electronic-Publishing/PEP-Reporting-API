@@ -25,10 +25,12 @@ def get_formatted_issue_body(feedback):
     return """
 URL: {url}
 Browser: {browser}
+Reporter: {reporter_name}
 
 {description}
 """.format(
         url=feedback['url'],
         browser=feedback['browser'],
+        reporter_name=feedback['reporter_name'],
         description=feedback['description']
     )

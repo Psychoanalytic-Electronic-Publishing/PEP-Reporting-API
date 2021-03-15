@@ -9,6 +9,8 @@ class GitHubHelper:
         repo = git_client.get_repo(app.config[Config.GITHUB_REPO])
         resp = repo.create_issue(
             title=subject,
-            body=description
+            body=description,
+            labels=app.config[Config.GITHUB_LABELS],
+            assignees=app.config[Config.GITHUB_ASSIGNEES]
         )
         return resp

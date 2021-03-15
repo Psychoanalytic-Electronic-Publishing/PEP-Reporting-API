@@ -21,7 +21,8 @@ def test_FeedbackSchema_works(schema: FeedbackSchema):
                     "description": "test description",
                     "url": "https://test.com",
                     "feedbackType": "ISSUE",
-                    "browser": "firefox"
+                    "browser": "firefox",
+                    "reporterName": "test name"
                 }
             }
         }
@@ -32,4 +33,5 @@ def test_FeedbackSchema_works(schema: FeedbackSchema):
     assert params['url'] == "https://test.com"
     assert params['feedback_type'] == "ISSUE"
     assert params['browser'] == "firefox"
+    assert params['reporter_name'] == "test name"
 
