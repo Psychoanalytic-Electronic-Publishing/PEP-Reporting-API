@@ -23,7 +23,8 @@ feedback = schema.load(
                 "url": "https://test.com",
                 "feedbackType": "ISSUE",
                 "browser": "firefox",
-                "reporterName": "ghee buttersnaps"
+                "reporterName": "ghee buttersnaps",
+                "reporterEmail": "ghee@test.com",
             }
         }
     }
@@ -43,6 +44,7 @@ def test_save_new_data_error(githubhelper_mock, app):  # noqa
         assert output['feedback_type'] == feedback['feedback_type']
         assert output['browser'] == feedback['browser']
         assert output['reporter_name'] == feedback['reporter_name']
+        assert output['reporter_email'] == feedback['reporter_email']
 
 
 def test_get_formatted_issue_subject():  # noqa
@@ -55,7 +57,8 @@ def test_get_formatted_issue_body():  # noqa
     assert resp == f"""
 URL: {feedback['url']}
 Browser: {feedback['browser']}
-Reporter: {feedback['reporter_name']}
+Reporter Name: {feedback['reporter_name']}
+Reporter Email: {feedback['reporter_email']}
 
 {feedback['description']}
 """
