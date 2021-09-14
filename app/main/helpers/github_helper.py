@@ -4,13 +4,13 @@ from github import Github
 
 class GitHubHelper:
     @staticmethod
-    def create_issue(subject, description):
+    def create_issue(subject, description, assignees):
         git_client = Github(app.config[Config.GITHUB_TOKEN])
         repo = git_client.get_repo(app.config[Config.GITHUB_REPO])
         resp = repo.create_issue(
             title=subject,
             body=description,
             labels=app.config[Config.GITHUB_LABELS],
-            assignees=app.config[Config.GITHUB_ASSIGNEES]
+            assignees=assignees
         )
         return resp

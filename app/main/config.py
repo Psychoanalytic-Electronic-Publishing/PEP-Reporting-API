@@ -21,7 +21,8 @@ class Config:
     GITHUB_TOKEN = "GITHUB_TOKEN"
     GITHUB_REPO = "GITHUB_REPO"
     GITHUB_LABELS = "GITHUB_LABELS"
-    GITHUB_ASSIGNEES = "GITHUB_ASSIGNEES"
+    GITHUB_ASSIGNEES_FEEDBACK = "GITHUB_ASSIGNEES_FEEDBACK"
+    GITHUB_ASSIGNEES_DATAERROR = "GITHUB_ASSIGNEES_DATAERROR"
 
     def __init__(self, environment: str = None):
         self.config_values = ConfigValues(environment)
@@ -75,8 +76,10 @@ class ConfigValues:
         self.GITHUB_REPO = self.__get_config_value(Config.GITHUB_REPO) or ""
         self.GITHUB_LABELS = self.__get_config_value(
             Config.GITHUB_LABELS, self.__string_to_list) or []
-        self.GITHUB_ASSIGNEES = self.__get_config_value(
-            Config.GITHUB_ASSIGNEES, self.__string_to_list) or []
+        self.GITHUB_ASSIGNEES_FEEDBACK = self.__get_config_value(
+            Config.GITHUB_ASSIGNEES_FEEDBACK, self.__string_to_list) or []
+        self.GITHUB_ASSIGNEES_DATAERROR = self.__get_config_value(
+            Config.GITHUB_ASSIGNEES_DATAERROR, self.__string_to_list) or []
 
         # setup default client w/ provided or default region and profile
         self.AWS_PROFILE = self.__get_config_value(Config.AWS_PROFILE)

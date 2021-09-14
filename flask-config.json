@@ -9,7 +9,8 @@
         "DATA_ERROR_TOPIC_ARN": "test",
         "DATA_ERROR_EMAIL_SUBJECT": "test",
         "GITHUB_LABELS": "",
-        "GITHUB_ASSIGNEES": ""
+        "GITHUB_ASSIGNEES_FEEDBACK": "",
+        "GITHUB_ASSIGNEES_DATAERROR": ""
     },
     "local":
     {

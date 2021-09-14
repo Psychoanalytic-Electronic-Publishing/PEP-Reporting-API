@@ -1,38 +1,29 @@
-from app.main.exceptions.flask_exceptions import GenericException, EntityNotFoundException
 from .base.base_service import BaseService
 from app.main.config import Config
-from app.main.helpers.dynamodb_helper import DynamoDbHelper
-from app.main.helpers.sns_helper import SnsHelper
+from app.main.helpers.github_helper import GitHubHelper
 from flask import current_app as app
-import datetime
-import time
-
+from app.main.config import Config
 class DataErrorService(BaseService):
     @staticmethod
     def save_new_data_error(data):
-        # save data error to dynamodb
-        data['id'] = int(time.time())
-        data['date_created'] = datetime.datetime.utcnow().isoformat()
-        data['date_modified'] = data['date_created']
-        data['is_active'] = True
-        resp = DynamoDbHelper.save_data_error(data)
-        data_error_item = DynamoDbHelper.get_data_error(data['id'])
+        resp = GitHubHelper.create_issue(
+            get_formatted_issue_subject(data),
+            get_formatted_issue_body(data),
+            app.config[Config.GITHUB_ASSIGNEES_DATAERROR]
+        )
+        data['id'] = resp.number
+        return {"data": data, "includes": []}
 
-        # send data error email
-        try:
-            SnsHelper.send_message_to_topic(
-                app.config[Config.DATA_ERROR_TOPIC_ARN],
-                app.config[Config.DATA_ERROR_EMAIL_SUBJECT],
-                get_formatted_data_error_email_body(data_error_item),
-                get_formatted_data_error_sms_body(data_error_item))
-        except Exception as e:
-            app.logger.error(e)
 
-        return {"data": data_error_item, "includes": []}
+def get_formatted_issue_subject(data):
+    return "[{issue_type}] {subject}".format(
+        issue_type='DATA',
+        subject=data['url_problem_page']
+    )
 
-def get_formatted_data_error_email_body(data_error_item):
-    return """Hello,
-A PEP data error has been reported by {full_name}.
+
+def get_formatted_issue_body(data_error_item):
+    return """A PEP data error has been reported by {full_name}.
 
 Username: "{username}"
 Email: "{email}"
@@ -45,9 +36,7 @@ Problem Text: "{problem_text}"
 Corrected text: "{corrected_text}"
 
 Additional Info: "{additional_info}"
-
-Thanks,
-The PEP Team""".format(
+""".format(
     full_name=data_error_item['full_name'],
     username=data_error_item['username'],
     email=data_error_item['email'],
@@ -58,7 +47,3 @@ The PEP Team""".format(
     corrected_text=data_error_item['corrected_text'],
     additional_info=data_error_item['additional_info']
     )
-
-def get_formatted_data_error_sms_body(data_error_item):
-    return "A PEP data error has been reported by {full_name}.".format(
-        full_name=data_error_item['full_name'])
