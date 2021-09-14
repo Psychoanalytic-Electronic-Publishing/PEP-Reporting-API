@@ -6,11 +6,9 @@ from unittest.mock import patch
 from unittest.mock import Mock
 from app.test.fixtures import app
 from app.main.service.data_error_service import DataErrorService
-from app.main.service.data_error_service import get_formatted_data_error_sms_body
-from app.main.service.data_error_service import get_formatted_data_error_email_body
+from app.main.service.data_error_service import get_formatted_issue_body, get_formatted_issue_subject
 from app.main.schema.data_error_schema import DataErrorSchema
-from app.main.helpers.dynamodb_helper import DynamoDbHelper
-from app.main.helpers.sns_helper import SnsHelper
+from app.main.helpers.github_helper import GitHubHelper
 
 schema = DataErrorSchema()
 data_error = schema.load(
@@ -31,42 +29,33 @@ data_error = schema.load(
     }
 )
 
-
-@patch.object(DynamoDbHelper, 'save_data_error')
-@patch.object(DynamoDbHelper, 'get_data_error')
-@patch.object(SnsHelper, 'send_message_to_topic')
-def test_save_new_data_error(save_data_error_mock, get_data_error_mock, send_message_to_topic_mock, app):  # noqa
+@patch.object(GitHubHelper, 'create_issue')
+def test_save_new_data_error(githubhelper_mock, app):  # noqa
     with app.app_context():
-        get_data_error_mock.return_value = data_error
+        resp = DataErrorService.save_new_data_error(data_error)
 
-        DataErrorService.save_new_data_error(data_error)
+        githubhelper_mock.assert_called_once()
+        output = resp.get('data')
+        assert output['username'] == data_error['username']
 
-        save_data_error_mock.assert_called_once()
-        get_data_error_mock.assert_called_once()
-        send_message_to_topic_mock.assert_called_once()
-
-
-def test_get_formatted_data_error_sms_body():  # noqa
-    resp = get_formatted_data_error_sms_body(data_error)
-    assert resp == "A PEP data error has been reported by Ovaltine Jenkins."
+def test_get_formatted_issue_subject():  # noqa
+    resp = get_formatted_issue_subject(data_error)
+    assert resp == "[DATA] https://test.com"
 
 
-def test_get_formatted_data_error_email_body():  # noqa
-    resp = get_formatted_data_error_email_body(data_error)
-    assert resp == f"""Hello,
-A PEP data error has been reported by {data_error['full_name']}.
+def test_get_formatted_issue_body():  # noqa
+    resp = get_formatted_issue_body(data_error)
+    assert resp == f"""A PEP data error has been reported by Ovaltine Jenkins.
 
-Username: "{data_error['username']}"
-Email: "{data_error['email']}"
-Author or Publisher?: {data_error['is_author_publisher']}
-Has original paper?: {data_error['has_original_copy']}
-URL: "{data_error['url_problem_page']}"
+Username: "OvaltineJenkins"
+Email: "ovaltine.jenkins@gmail.com"
+Author or Publisher?: False
+Has original paper?: True
+URL: "https://test.com"
 
-Problem Text: "{data_error['problem_text']}"
+Problem Text: "bad"
 
-Corrected text: "{data_error['corrected_text']}"
+Corrected text: "good"
 
-Additional Info: "{data_error['additional_info']}"
-
-Thanks,
-The PEP Team"""
+Additional Info: ""
+"""

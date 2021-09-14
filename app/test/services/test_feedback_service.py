@@ -6,8 +6,7 @@ from unittest.mock import patch
 from unittest.mock import Mock
 from app.test.fixtures import app
 from app.main.service.feedback_service import FeedbackService
-from app.main.service.feedback_service import get_formatted_issue_body
-from app.main.service.feedback_service import get_formatted_issue_subject
+from app.main.service.feedback_service import get_formatted_issue_body, get_formatted_issue_subject
 from app.main.schema.feedback_schema import FeedbackSchema
 from app.main.helpers.github_helper import GitHubHelper
 
@@ -49,16 +48,16 @@ def test_save_new_data_error(githubhelper_mock, app):  # noqa
 
 def test_get_formatted_issue_subject():  # noqa
     resp = get_formatted_issue_subject(feedback)
-    assert resp == f"[{feedback['feedback_type']}] {feedback['subject']}"
+    assert resp == "[ISSUE] I found a sandwich in one of your parks"
 
 
 def test_get_formatted_issue_body():  # noqa
     resp = get_formatted_issue_body(feedback)
     assert resp == f"""
-URL: {feedback['url']}
-Browser: {feedback['browser']}
-Reporter Name: {feedback['reporter_name']}
-Reporter Email: {feedback['reporter_email']}
+URL: https://test.com
+Browser: firefox
+Reporter Name: ghee buttersnaps
+Reporter Email: ghee@test.com
 
-{feedback['description']}
+i found a sandwich in one of your parks, and i want to know why it didn't have mayonnaise!
 """
