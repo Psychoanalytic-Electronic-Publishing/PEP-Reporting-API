@@ -56,7 +56,8 @@ class RouteGenerator:
                                 'X-Amz-Security-Token',
                                 'X-Amz-User-Agent',
                                 'client-session',
-                                'client-id'
+                                'client-id',
+                                'x-pep-auth'
                             ]
                         )
                     )
