@@ -3,7 +3,6 @@ from pytest import fixture
 from typing import List
 from unittest.mock import patch
 from unittest.mock import Mock
-from app.test.fixtures import app
 from app.main.service.data_error_service import DataErrorService
 from app.main.service.data_error_service import get_formatted_issue_body, get_formatted_issue_subject
 from app.main.schema.data_error_schema import DataErrorSchema
@@ -30,13 +29,12 @@ data_error = schema.load(
 
 
 @patch.object(GitHubHelper, 'create_issue')
-def test_save_new_data_error(githubhelper_mock, app):  # noqa
-    with app.app_context():
-        resp = DataErrorService.save_new_data_error(data_error)
+def test_save_new_data_error(githubhelper_mock):  # noqa
+    resp = DataErrorService.save_new_data_error(data_error)
 
-        githubhelper_mock.assert_called_once()
-        output = resp.get('data')
-        assert output['username'] == data_error['username']
+    githubhelper_mock.assert_called_once()
+    output = resp.get('data')
+    assert output['username'] == data_error['username']
 
 
 def test_get_formatted_issue_subject():  # noqa
