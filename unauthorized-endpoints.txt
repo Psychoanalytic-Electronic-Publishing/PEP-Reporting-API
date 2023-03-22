@@ -1,3 +1,0 @@
-#simply include one endpoint name per line...case sensitive
-createDataError
-createFeedback
