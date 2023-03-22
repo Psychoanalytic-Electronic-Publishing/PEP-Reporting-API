@@ -1,6 +1,5 @@
 import datetime
 from pytest import fixture
-from flask import request
 from typing import List
 from unittest.mock import patch
 from unittest.mock import Mock
@@ -29,6 +28,7 @@ data_error = schema.load(
     }
 )
 
+
 @patch.object(GitHubHelper, 'create_issue')
 def test_save_new_data_error(githubhelper_mock, app):  # noqa
     with app.app_context():
@@ -37,6 +37,7 @@ def test_save_new_data_error(githubhelper_mock, app):  # noqa
         githubhelper_mock.assert_called_once()
         output = resp.get('data')
         assert output['username'] == data_error['username']
+
 
 def test_get_formatted_issue_subject():  # noqa
     resp = get_formatted_issue_subject(data_error)
