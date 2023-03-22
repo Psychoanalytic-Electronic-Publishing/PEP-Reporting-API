@@ -1,6 +1,5 @@
 import datetime
 from pytest import fixture
-from flask import request
 from typing import List
 from unittest.mock import patch
 from unittest.mock import Mock

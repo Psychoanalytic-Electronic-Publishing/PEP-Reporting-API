@@ -9,10 +9,11 @@ from app.main import app
 
 api = Namespace('feedback', description='feedback related operations')
 
-#schemas
+# schemas
 default_schema = FeedbackSchema()
 list_schema = FeedbackSchema(many=True)
 create_schema = FeedbackSchema(unknown="EXCLUDE")
+
 
 @api.route('/')
 class FeedbackResource(Resource):

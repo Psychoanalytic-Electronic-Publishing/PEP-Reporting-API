@@ -1,7 +1,7 @@
 from .base.base_service import BaseService
 from app.main.helpers.github_helper import GitHubHelper
-from flask import current_app as app
 from app.main.config import Config
+
 
 class FeedbackService(BaseService):
     @staticmethod
@@ -9,7 +9,7 @@ class FeedbackService(BaseService):
         resp = GitHubHelper.create_issue(
             get_formatted_issue_subject(data),
             get_formatted_issue_body(data),
-            app.config[Config.GITHUB_ASSIGNEES_FEEDBACK]
+            Config.GITHUB_ASSIGNEES_FEEDBACK
         )
         data['id'] = resp.number
         return {"data": data, "includes": []}
