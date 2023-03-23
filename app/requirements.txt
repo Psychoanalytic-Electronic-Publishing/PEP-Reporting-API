@@ -7,4 +7,3 @@ marshmallow-jsonapi==0.24.0
 ujson==3.0.0
 urllib3==1.25.8
 wrapt==1.11.2
-
