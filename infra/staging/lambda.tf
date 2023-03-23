@@ -27,7 +27,7 @@ module "feedback_lambda" {
   source  = "terraform-aws-modules/lambda/aws"
   version = "4.9.0"
 
-  function_name           = "${var.stack_name}-data-error-handler-${var.env}"
+  function_name           = "${var.stack_name}-feedback-handler-${var.env}"
   source_path             = "../../app"
   handler                 = "main/controller/feedback_controller.handler"
   runtime                 = "python3.8"
