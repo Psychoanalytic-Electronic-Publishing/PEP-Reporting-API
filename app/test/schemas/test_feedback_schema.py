@@ -1,6 +1,6 @@
 from pytest import fixture
 
-from app.main.schema.feedback_schema import FeedbackSchema
+from main.schema.feedback_schema import FeedbackSchema
 
 
 @fixture
@@ -10,6 +10,7 @@ def schema() -> FeedbackSchema:
 
 def test_FeedbackSchema_create(schema: FeedbackSchema):
     assert schema
+
 
 def test_FeedbackSchema_works(schema: FeedbackSchema):
     params = schema.load(
@@ -36,4 +37,3 @@ def test_FeedbackSchema_works(schema: FeedbackSchema):
     assert params['browser'] == "firefox"
     assert params['reporter_name'] == "test name"
     assert params['reporter_email'] == "test@test.test"
-

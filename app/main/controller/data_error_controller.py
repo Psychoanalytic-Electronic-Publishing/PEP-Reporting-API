@@ -1,7 +1,8 @@
-from app.main.service.data_error_service import DataErrorService
-from app.main.schema.data_error_schema import DataErrorSchema
+from main.service.data_error_service import DataErrorService
+from main.schema.data_error_schema import DataErrorSchema
 
 create_schema = DataErrorSchema(unknown="EXCLUDE")
+
 
 def handler(event, context):
     print(event)

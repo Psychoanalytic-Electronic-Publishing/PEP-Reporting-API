@@ -1,4 +1,4 @@
-from app.main.config import Config
+from main.config import Config
 from github import Github
 
 

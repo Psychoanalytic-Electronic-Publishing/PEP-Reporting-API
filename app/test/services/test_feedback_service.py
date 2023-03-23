@@ -3,10 +3,10 @@ from pytest import fixture
 from typing import List
 from unittest.mock import patch
 from unittest.mock import Mock
-from app.main.service.feedback_service import FeedbackService
-from app.main.service.feedback_service import get_formatted_issue_body, get_formatted_issue_subject
-from app.main.schema.feedback_schema import FeedbackSchema
-from app.main.helpers.github_helper import GitHubHelper
+from main.service.feedback_service import FeedbackService
+from main.service.feedback_service import get_formatted_issue_body, get_formatted_issue_subject
+from main.schema.feedback_schema import FeedbackSchema
+from main.helpers.github_helper import GitHubHelper
 
 
 schema = FeedbackSchema()

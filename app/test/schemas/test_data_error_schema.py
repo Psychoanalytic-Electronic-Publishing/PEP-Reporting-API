@@ -1,6 +1,6 @@
 from pytest import fixture
 
-from app.main.schema.data_error_schema import DataErrorSchema
+from main.schema.data_error_schema import DataErrorSchema
 
 
 @fixture
@@ -10,6 +10,7 @@ def schema() -> DataErrorSchema:
 
 def test_DataErrorSchema_create(schema: DataErrorSchema):
     assert schema
+
 
 def test_DataErrorSchema_works(schema: DataErrorSchema):
     params = schema.load(

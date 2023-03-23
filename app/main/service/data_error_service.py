@@ -1,7 +1,7 @@
 from .base.base_service import BaseService
-from app.main.config import Config
-from app.main.helpers.github_helper import GitHubHelper
-from app.main.config import Config
+from main.config import Config
+from main.helpers.github_helper import GitHubHelper
+from main.config import Config
 
 
 class DataErrorService(BaseService):

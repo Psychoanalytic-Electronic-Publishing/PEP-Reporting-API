@@ -1,5 +1,5 @@
-from app.main.service.feedback_service import FeedbackService
-from app.main.schema.feedback_schema import FeedbackSchema
+from main.service.feedback_service import FeedbackService
+from main.schema.feedback_schema import FeedbackSchema
 
 create_schema = FeedbackSchema(unknown="EXCLUDE")
 
