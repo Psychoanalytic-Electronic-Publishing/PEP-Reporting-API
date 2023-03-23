@@ -1,5 +1,6 @@
 module "data_error_lambda" {
-  source = "terraform-aws-modules/lambda/aws"
+  source  = "terraform-aws-modules/lambda/aws"
+  version = "4.9.0"
 
   function_name = "${var.stack_name}-data-error-handler-${var.env}"
   source_path   = "../../app"
