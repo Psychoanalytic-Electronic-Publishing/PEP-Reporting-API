@@ -2,13 +2,13 @@ module "data_error_lambda" {
   source  = "terraform-aws-modules/lambda/aws"
   version = "4.9.0"
 
-  function_name = "${var.stack_name}-data-error-handler-${var.env}"
-  source_path   = "../../app"
-  handler       = "main/controller/data_error_controller.handler"
-  runtime       = "python3.8"
-  timeout       = 29
-  memory_size   = 3072
-
+  function_name           = "${var.stack_name}-data-error-handler-${var.env}"
+  source_path             = "../../app"
+  handler                 = "main/controller/data_error_controller.handler"
+  runtime                 = "python3.8"
+  timeout                 = 29
+  memory_size             = 3072
+  ignore_source_code_hash = true
 
   tags = {
     stage = var.env
