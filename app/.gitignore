@@ -256,3 +256,5 @@ app/main/*.db
 flask-config-overwrite.json
 #workspace file
 *.code-workspace
+
+.DS_store
