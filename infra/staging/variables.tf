@@ -37,3 +37,8 @@ variable "github_token" {
   description = "Github token for issues"
   sensitive   = true
 }
+
+variable "cors_origin" {
+  description = "CORS origin"
+  default     = "https=//stage.pep-web.org"
+}
