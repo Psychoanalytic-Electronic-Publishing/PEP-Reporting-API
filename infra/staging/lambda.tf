@@ -15,11 +15,10 @@ module "data_error_lambda" {
   }
 
   environment_variables = {
-    "GITHUB_ASSIGNEES_DATAERROR" = var.github_assignees_data_error
-    "GITHUB_ASSIGNEES_FEEDBACK"  = var.github_assignees_feedback
-    "GITHUB_LABELS"              = var.github_labels
-    "GITHUB_REPO"                = var.github_repo
-    "GITHUB_TOKEN"               = var.github_token
+    "GITHUB_ASSIGNEES" = var.github_assignees_data_error
+    "GITHUB_LABELS"    = var.github_labels
+    "GITHUB_REPO"      = var.github_repo
+    "GITHUB_TOKEN"     = var.github_token
   }
 }
 
@@ -40,10 +39,9 @@ module "feedback_lambda" {
   }
 
   environment_variables = {
-    "GITHUB_ASSIGNEES_DATAERROR" = var.github_assignees_data_error
-    "GITHUB_ASSIGNEES_FEEDBACK"  = var.github_assignees_feedback
-    "GITHUB_LABELS"              = var.github_labels
-    "GITHUB_REPO"                = var.github_repo
-    "GITHUB_TOKEN"               = var.github_token
+    "GITHUB_ASSIGNEES" = var.github_assignees_feedback
+    "GITHUB_LABELS"    = var.github_labels
+    "GITHUB_REPO"      = var.github_repo
+    "GITHUB_TOKEN"     = var.github_token
   }
 }

@@ -9,7 +9,7 @@ class FeedbackService(BaseService):
         resp = GitHubHelper.create_issue(
             get_formatted_issue_subject(data),
             get_formatted_issue_body(data),
-            Config.GITHUB_ASSIGNEES_FEEDBACK
+            Config.GITHUB_ASSIGNEES
         )
         data['id'] = resp.number
         return {"data": data, "includes": []}
