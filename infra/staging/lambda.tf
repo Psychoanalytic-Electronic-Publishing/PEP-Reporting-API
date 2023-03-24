@@ -15,13 +15,14 @@ module "data_error_lambda" {
   }
 
   environment_variables = {
-    "GITHUB_ASSIGNEES_DATAERROR" = "jordanallen-dev"
-    "GITHUB_ASSIGNEES_FEEDBACK"  = "jordanallen-dev"
-    "GITHUB_LABELS"              = "Client User Issue Reported"
-    "GITHUB_REPO"                = "jordanallen-dev/pep-test"
-    "GITHUB_TOKEN"               = "..."
+    "GITHUB_ASSIGNEES_DATAERROR" = var.github_assignees_data_error
+    "GITHUB_ASSIGNEES_FEEDBACK"  = var.github_assignees_feedback
+    "GITHUB_LABELS"              = var.github_labels
+    "GITHUB_REPO"                = var.github_repo
+    "GITHUB_TOKEN"               = var.github_token
   }
 }
+
 module "feedback_lambda" {
   source  = "terraform-aws-modules/lambda/aws"
   version = "4.9.0"
@@ -39,10 +40,10 @@ module "feedback_lambda" {
   }
 
   environment_variables = {
-    "GITHUB_ASSIGNEES_DATAERROR" = "jordanallen-dev"
-    "GITHUB_ASSIGNEES_FEEDBACK"  = "jordanallen-dev"
-    "GITHUB_LABELS"              = "Client User Issue Reported"
-    "GITHUB_REPO"                = "jordanallen-dev/pep-test"
-    "GITHUB_TOKEN"               = "..."
+    "GITHUB_ASSIGNEES_DATAERROR" = var.github_assignees_data_error
+    "GITHUB_ASSIGNEES_FEEDBACK"  = var.github_assignees_feedback
+    "GITHUB_LABELS"              = var.github_labels
+    "GITHUB_REPO"                = var.github_repo
+    "GITHUB_TOKEN"               = var.github_token
   }
 }
