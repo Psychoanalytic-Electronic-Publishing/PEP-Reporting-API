@@ -38,7 +38,17 @@ variable "github_token" {
   sensitive   = true
 }
 
+variable "root_domain" {
+  description = "Root domain name"
+  default     = "pep-web.org"
+}
+
 variable "cors_origin" {
   description = "CORS origin"
-  default     = "https=//stage.pep-web.org"
+  default     = "https://stage.pep-web.org"
+}
+
+variable "api_domain" {
+  description = "Domain name"
+  default     = "stage-report.pep-web.org"
 }
