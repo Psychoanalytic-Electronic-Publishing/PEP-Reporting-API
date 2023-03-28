@@ -14,25 +14,9 @@ def handler(event, context):
         data = create_schema.loads(event['body'])
         resp = DataErrorService.save_new_data_error(data=data)
 
-        return {
-            "statusCode": 200,
-            "headers": {
-                "Access-Control-Allow-Origin": Config.CORS_ORIGINS,
-                "Access-Control-Allow-Credentials": True,
-                'Content-Type': 'application/json'
-            },
-            "body": json.dumps(resp)
-        }
+        return ResponseHelper.create_response(resp)
 
     except Exception as e:
         print(e)
 
-        return {
-            "statusCode": 500,
-            "headers": {
-                "Access-Control-Allow-Origin": Config.CORS_ORIGINS,
-                "Access-Control-Allow-Credentials": True,
-                'Content-Type': 'application/json'
-            },
-            "body": json.dumps({"message": str(e)})
-        }
+        return ResponseHelper.create_response({"message": str(e)}, 500)

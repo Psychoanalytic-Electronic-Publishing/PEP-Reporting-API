@@ -1,8 +1,9 @@
 import os
 
 
+
 class Config:
-    CORS_ORIGINS = os.environ.get("CORS_ORIGINS")
+    CORS_ORIGIN = os.environ.get("CORS_ORIGIN")
     GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
     GITHUB_REPO = os.environ.get("GITHUB_REPO")
     GITHUB_LABELS = os.environ.get("GITHUB_LABELS").split(
