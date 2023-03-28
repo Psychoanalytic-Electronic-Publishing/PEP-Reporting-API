@@ -22,6 +22,15 @@ module "data_error_lambda" {
   }
 }
 
+resource "aws_lambda_permission" "allow_api_data_error" {
+  statement_id  = "${var.stack_name}-allow-api-data-error-${var.env}"
+  action        = "lambda:InvokeFunction"
+  function_name = module.data_error_lambda.lambda_function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_api_gateway_rest_api.api_gateway.execution_arn}/*/*/*"
+}
+
+
 module "feedback_lambda" {
   source  = "terraform-aws-modules/lambda/aws"
   version = "4.9.0"
@@ -45,3 +54,13 @@ module "feedback_lambda" {
     "GITHUB_TOKEN"     = var.github_token
   }
 }
+
+
+resource "aws_lambda_permission" "allow_api_data_feedback" {
+  statement_id  = "${var.stack_name}-allow-api-feedback-${var.env}"
+  action        = "lambda:InvokeFunction"
+  function_name = module.feedback_lambda.lambda_function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_api_gateway_rest_api.api_gateway.execution_arn}/*/*/*"
+}
+
