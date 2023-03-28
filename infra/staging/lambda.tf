@@ -19,6 +19,7 @@ module "data_error_lambda" {
     "GITHUB_LABELS"    = var.github_labels
     "GITHUB_REPO"      = var.github_repo
     "GITHUB_TOKEN"     = var.github_token
+    "CORS_ORIGIN"      = var.cors_origin
   }
 }
 
@@ -52,6 +53,7 @@ module "feedback_lambda" {
     "GITHUB_LABELS"    = var.github_labels
     "GITHUB_REPO"      = var.github_repo
     "GITHUB_TOKEN"     = var.github_token
+    "CORS_ORIGIN"      = var.cors_origin
   }
 }
 
