@@ -8,5 +8,19 @@ create_schema = DataErrorSchema(unknown=EXCLUDE)
 def handler(event, context):
     print(event)
 
-    data = create_schema.loads(event['body'])
-    return DataErrorService.save_new_data_error(data=data)
+    try:
+        data = create_schema.loads(event['body'])
+        resp = DataErrorService.save_new_data_error(data=data)
+
+        return {
+            "statusCode": 200,
+            "body": resp
+        }
+        
+    except Exception as e:
+        print(e)
+
+        return {
+            "statusCode": 400,
+            "body": e
+        }
