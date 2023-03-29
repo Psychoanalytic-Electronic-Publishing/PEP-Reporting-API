@@ -1,5 +1,5 @@
 from main.config import Config
-from github import Github
+from github import Github, GithubIntegration
 import base64
 
 
