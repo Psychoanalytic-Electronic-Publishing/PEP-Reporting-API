@@ -15,11 +15,13 @@ module "data_error_lambda" {
   }
 
   environment_variables = {
-    "GITHUB_ASSIGNEES" = var.github_assignees_data_error
-    "GITHUB_LABELS"    = var.github_labels
-    "GITHUB_REPO"      = var.github_repo
-    "GITHUB_TOKEN"     = var.github_token
-    "CORS_ORIGINS"     = var.cors_origin
+    "GITHUB_ASSIGNEES"   = var.github_assignees_data_error
+    "GITHUB_LABELS"      = var.github_labels
+    "GITHUB_OWNER"       = var.github_owner
+    "GITHUB_REPO"        = var.github_repo
+    "GITHUB_PRIVATE_KEY" = var.github_private_key
+    "GITHUB_APP_ID"      = var.github_app_id
+    "CORS_ORIGINS"       = var.cors_origin
   }
 }
 
@@ -49,11 +51,13 @@ module "feedback_lambda" {
   }
 
   environment_variables = {
-    "GITHUB_ASSIGNEES" = var.github_assignees_feedback
-    "GITHUB_LABELS"    = var.github_labels
-    "GITHUB_REPO"      = var.github_repo
-    "GITHUB_TOKEN"     = var.github_token
-    "CORS_ORIGIN"      = var.cors_origin
+    "GITHUB_ASSIGNEES"   = var.github_assignees_feedback
+    "GITHUB_LABELS"      = var.github_labels
+    "GITHUB_OWNER"       = var.github_owner
+    "GITHUB_REPO"        = var.github_repo
+    "GITHUB_PRIVATE_KEY" = var.github_private_key
+    "GITHUB_APP_ID"      = var.github_app_id
+    "CORS_ORIGIN"        = var.cors_origin
   }
 }
 

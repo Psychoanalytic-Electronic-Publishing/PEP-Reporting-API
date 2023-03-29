@@ -28,14 +28,24 @@ variable "github_labels" {
   default     = "Client User Issue Reported"
 }
 
-variable "github_repo" {
-  description = "Github repo for issues"
-  default     = "jordanallen-dev/pep-test"
+variable "github_private_key" {
+  description = "Github private key for app"
+  sensitive   = true
 }
 
-variable "github_token" {
-  description = "Github token for issues"
-  sensitive   = true
+variable "github_app_id" {
+  description = "Github app id"
+  default     = 306306
+}
+
+variable "github_owner" {
+  description = "Github owner"
+  default     = "Psychoanalytic-Electronic-Publishing"
+}
+
+variable "github_repo" {
+  description = "Github repo for issues"
+  default     = "pep-reporting-api"
 }
 
 variable "root_domain" {
