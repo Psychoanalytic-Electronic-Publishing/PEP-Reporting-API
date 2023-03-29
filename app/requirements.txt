@@ -12,7 +12,7 @@ marshmallow-jsonapi==0.24.0
 packaging==23.0
 pycparser==2.21
 PyGithub==1.54.1
-PyJWT==1.7.1
+PyJWT==2.6.0
 regex==2022.10.31
 requests==2.28.2
 ujson==3.0.0
