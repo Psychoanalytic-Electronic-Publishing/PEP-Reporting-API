@@ -94,7 +94,7 @@ resource "aws_lambda_permission" "allow_api_data_feedback" {
 
 module "test_lambda" {
   depends_on = [
-    feedback_lambda
+    module.feedback_lambda
   ]
 
   source  = "terraform-aws-modules/lambda/aws"
