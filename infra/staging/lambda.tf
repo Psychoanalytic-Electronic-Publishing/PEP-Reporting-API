@@ -47,8 +47,8 @@ module "feedback_lambda" {
 
   function_name = "${var.stack_name}-feedback-handler-${var.env}"
   source_path = [
-    "../../app",
     {
+      path = "../../app",
       commands = [
         "pip install --platform manylinux2014_x86_64 --implementation cp --python 3.8 --only-binary=:all: --upgrade -t . cryptography",
         "pip install -r requirements.txt -t .",
