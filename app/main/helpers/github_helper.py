@@ -11,12 +11,11 @@ class GitHubHelper:
             Config.GITHUB_PRIVATE_KEY).decode("utf-8")
 
         integration = GithubIntegration(
-            Config.GITHUB_APP_ID, private_key, base_url="https://github.com/api/v3")
+            Config.GITHUB_APP_ID, private_key)
 
         access = integration.get_access_token(Config.GITHUB_INSTALLATION_ID)
 
-        git_client = Github(login_or_token=access.token,
-                            base_url="https://github.com/api/v3")
+        git_client = Github(login_or_token=access.token)
 
         repo = git_client.get_repo(
             f"{Config.GITHUB_OWNER}/{Config.GITHUB_REPO}")
