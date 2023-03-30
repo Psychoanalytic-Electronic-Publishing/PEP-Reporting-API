@@ -2,8 +2,16 @@ module "data_error_lambda" {
   source  = "terraform-aws-modules/lambda/aws"
   version = "4.9.0"
 
-  function_name           = "${var.stack_name}-data-error-handler-${var.env}"
-  source_path             = "../../app"
+  function_name = "${var.stack_name}-data-error-handler-${var.env}"
+  source_path = [
+    "../../app",
+    {
+      commands = [
+        "pip install --platform manylinux2014_x86_64 --implementation cp --python 3.8 --only-binary=:all: --upgrade -t . cryptography",
+        "pip install -r requirements.txt -t .",
+        ":zip"
+      ]
+  }]
   handler                 = "main/controller/data_error_controller.handler"
   runtime                 = "python3.8"
   timeout                 = 29
@@ -13,7 +21,6 @@ module "data_error_lambda" {
     stage = var.env
     stack = var.stack_name
   }
-
   environment_variables = {
     "GITHUB_ASSIGNEES"   = var.github_assignees_data_error
     "GITHUB_LABELS"      = var.github_labels
@@ -38,12 +45,21 @@ module "feedback_lambda" {
   source  = "terraform-aws-modules/lambda/aws"
   version = "4.9.0"
 
-  function_name           = "${var.stack_name}-feedback-handler-${var.env}"
-  source_path             = "../../app"
+  function_name = "${var.stack_name}-feedback-handler-${var.env}"
+  source_path = [
+    "../../app",
+    {
+      commands = [
+        "pip install --platform manylinux2014_x86_64 --implementation cp --python 3.8 --only-binary=:all: --upgrade -t . cryptography",
+        "pip install -r requirements.txt -t .",
+        ":zip"
+      ]
+  }]
   handler                 = "main/controller/feedback_controller.handler"
   runtime                 = "python3.8"
   timeout                 = 29
   ignore_source_code_hash = true
+
 
   tags = {
     stage = var.env
