@@ -38,6 +38,11 @@ variable "github_app_id" {
   default     = 306306
 }
 
+variable "github_installation_id" {
+  description = "Github installation id"
+  default     = 35322311
+}
+
 variable "github_owner" {
   description = "Github owner"
   default     = "Psychoanalytic-Electronic-Publishing"
