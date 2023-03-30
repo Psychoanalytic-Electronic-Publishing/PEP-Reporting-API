@@ -21,7 +21,7 @@ module "data_error_lambda" {
   version = "4.9.0"
 
   function_name          = "${var.stack_name}-data-error-handler-${var.env}"
-  local_existing_package = "../../app/${module.package.local_filename}"
+  local_existing_package = module.package.local_filename
   create_package         = false
   publish                = true
 
@@ -58,7 +58,7 @@ module "feedback_lambda" {
   version = "4.9.0"
 
   function_name          = "${var.stack_name}-feedback-handler-${var.env}"
-  local_existing_package = "../../app/${module.package.local_filename}"
+  local_existing_package = module.package.local_filename
   create_package         = false
   publish                = true
 
