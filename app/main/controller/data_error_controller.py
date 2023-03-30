@@ -3,6 +3,7 @@ from main.schema.data_error_schema import DataErrorSchema
 from marshmallow import EXCLUDE
 import json
 from main.config import Config
+import traceback
 
 create_schema = DataErrorSchema(unknown=EXCLUDE)
 
@@ -17,6 +18,6 @@ def handler(event, context):
         return ResponseHelper.create_response(resp)
 
     except Exception as e:
-        print(e)
+        traceback.print_exception(type(e), e, e.__traceback__)
 
         return ResponseHelper.create_response({"message": str(e)}, 500)
