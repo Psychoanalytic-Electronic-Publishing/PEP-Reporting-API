@@ -1,4 +1,4 @@
-module "package_data_error_lambda" {
+module "package" {
   source  = "terraform-aws-modules/lambda/aws"
   version = "2.31.0"
 
@@ -21,7 +21,7 @@ module "data_error_lambda" {
   version = "4.9.0"
 
   function_name          = "${var.stack_name}-data-error-handler-${var.env}"
-  local_existing_package = "../../app/${module.package_data_error_lambda.local_filename}"
+  local_existing_package = "../../app/${module.package.local_filename}"
   create_package         = false
   publish                = true
 
@@ -53,26 +53,18 @@ resource "aws_lambda_permission" "allow_api_data_error" {
   source_arn    = "${aws_api_gateway_rest_api.api_gateway.execution_arn}/*/*/*"
 }
 
-
 module "feedback_lambda" {
   source  = "terraform-aws-modules/lambda/aws"
   version = "4.9.0"
 
-  function_name = "${var.stack_name}-feedback-handler-${var.env}"
-  source_path = [
-    {
-      path = "../../app",
-      commands = [
-        "pip install --platform manylinux2014_x86_64 --implementation cp --python 3.8 --only-binary=:all: --upgrade -t . cryptography",
-        "pip install -r requirements.txt -t .",
-        ":zip"
-      ]
-  }]
-  handler                 = "main/controller/feedback_controller.handler"
-  runtime                 = "python3.8"
-  timeout                 = 29
-  ignore_source_code_hash = true
+  function_name          = "${var.stack_name}-feedback-handler-${var.env}"
+  local_existing_package = "../../app/${module.package.local_filename}"
+  create_package         = false
+  publish                = true
 
+  handler = "main/controller/feedback_controller.handler"
+  runtime = "python3.8"
+  timeout = 29
 
   tags = {
     stage = var.env
