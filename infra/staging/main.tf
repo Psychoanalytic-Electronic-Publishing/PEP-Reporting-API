@@ -16,3 +16,7 @@ terraform {
 provider "aws" {
   region = var.aws_region
 }
+
+module "reporting_api" {
+  source = "../modules/reporting"
+}
