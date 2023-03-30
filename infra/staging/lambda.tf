@@ -100,7 +100,7 @@ module "test_lambda" {
   source  = "terraform-aws-modules/lambda/aws"
   version = "4.9.0"
 
-  function_name = "${var.stack_name}-feedback-handler-${var.env}"
+  function_name = "${var.stack_name}-test-${var.env}"
   source_path = [
     {
       path = "../../app",
