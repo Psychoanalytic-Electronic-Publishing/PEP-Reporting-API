@@ -13,6 +13,8 @@ create_schema = FeedbackSchema(unknown=EXCLUDE)
 def handler(event, context):
     print(event)
 
+    print(vars(Config))
+
     try:
         data = create_schema.loads(event['body'])
         resp = FeedbackService.create_issue(data=data)
