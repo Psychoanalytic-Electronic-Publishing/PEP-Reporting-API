@@ -13,7 +13,7 @@ module "package" {
   }]
   runtime                  = "python3.8"
   create_function          = false
-  recreate_missing_package = false
+  recreate_missing_package = true
 }
 
 module "data_error_lambda" {
