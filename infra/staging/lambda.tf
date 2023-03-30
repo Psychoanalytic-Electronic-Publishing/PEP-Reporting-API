@@ -1,4 +1,5 @@
-module "package" {
+module "package_error" {
+
   source  = "terraform-aws-modules/lambda/aws"
   version = "2.31.0"
 
@@ -21,7 +22,7 @@ module "data_error_lambda" {
   version = "4.9.0"
 
   function_name          = "${var.stack_name}-data-error-handler-${var.env}"
-  local_existing_package = module.package.local_filename
+  local_existing_package = module.package_error.local_filename
   create_package         = false
   publish                = true
 
@@ -53,12 +54,32 @@ resource "aws_lambda_permission" "allow_api_data_error" {
   source_arn    = "${aws_api_gateway_rest_api.api_gateway.execution_arn}/*/*/*"
 }
 
+module "package_feedback" {
+
+  source  = "terraform-aws-modules/lambda/aws"
+  version = "2.31.0"
+
+  source_path = [
+    {
+      path = "../../app",
+      commands = [
+        "pip install --platform manylinux2014_x86_64 --implementation cp --python 3.8 --only-binary=:all: --upgrade -t . cryptography",
+        "pip install -r requirements.txt -t .",
+        ":zip"
+      ]
+  }]
+  runtime                  = "python3.8"
+  create_function          = false
+  recreate_missing_package = true
+}
+
+
 module "feedback_lambda" {
   source  = "terraform-aws-modules/lambda/aws"
   version = "4.9.0"
 
   function_name          = "${var.stack_name}-feedback-handler-${var.env}"
-  local_existing_package = module.package.local_filename
+  local_existing_package = module.package_feedback.local_filename
   create_package         = false
   publish                = true
 
@@ -83,12 +104,32 @@ module "feedback_lambda" {
   }
 }
 
+module "package_test" {
+
+  source  = "terraform-aws-modules/lambda/aws"
+  version = "2.31.0"
+
+  source_path = [
+    {
+      path = "../../app",
+      commands = [
+        "pip install --platform manylinux2014_x86_64 --implementation cp --python 3.8 --only-binary=:all: --upgrade -t . cryptography",
+        "pip install -r requirements.txt -t .",
+        ":zip"
+      ]
+  }]
+  runtime                  = "python3.8"
+  create_function          = false
+  recreate_missing_package = true
+}
+
+
 module "test_lambda" {
   source  = "terraform-aws-modules/lambda/aws"
   version = "4.9.0"
 
   function_name          = "${var.stack_name}-test-${var.env}"
-  local_existing_package = module.package.local_filename
+  local_existing_package = module.package_test.local_filename
   create_package         = false
   publish                = true
 
