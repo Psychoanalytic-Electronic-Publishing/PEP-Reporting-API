@@ -43,7 +43,9 @@ resource "aws_lambda_permission" "allow_api_data_error" {
 
 
 module "feedback_lambda" {
-  needs = [module.data_error_lambda]
+  depends_on = [
+    module.data_error_lambda
+  ]
 
   source  = "terraform-aws-modules/lambda/aws"
   version = "4.9.0"
