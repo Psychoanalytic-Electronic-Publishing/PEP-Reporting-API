@@ -35,7 +35,6 @@ jobs:
           echo "owner=${{ vars.OWNER }}" >> $GITHUB_OUTPUT
           echo "repo=${{ vars.REPO }}" >> $GITHUB_OUTPUT
           echo "cors_origin=${{ vars.CORS_ORIGIN }}" >> $GITHUB_OUTPUT
-          
 
   infrastructure:
     needs: [env]
@@ -47,7 +46,6 @@ jobs:
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      ENV_VARS: TF_VAR_github_private_key=${{ secrets.GH_PRIVATE_KEY}}
       ENV_VARS: "TF_VAR_github_private_key=${{ secrets.GH_PRIVATE_KEY}}\n\
         TF_VAR_github_assignees_data_error=${{ needs.env.outputs.data_error_assignees }}\n\
         TF_VAR_github_assignees_feedback=${{ needs.env.outputs.feedback_assignees }}\n\
@@ -56,4 +54,4 @@ jobs:
         TF_VAR_github_installation_id=${{ needs.env.outputs.installation_id }}\n\
         TF_VAR_github_owner=${{ needs.env.outputs.owner }}\n\
         TF_VAR_github_repo=${{ needs.env.outputs.repo }}\n\
-        TF_VAR_cors_origin=${{ needs.env.outputs.cors_origin }}\n\"
+        TF_VAR_cors_origin=${{ needs.env.outputs.cors_origin }}"
