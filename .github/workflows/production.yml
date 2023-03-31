@@ -1,0 +1,22 @@
+name: Plan and deploy infrastructure
+
+on:
+  push:
+    branches:
+      - master
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  infrastructure:
+    uses: jordanallen-dev/reusable-terraform-workflow/.github/workflows/terraform.yml@main
+    with:
+      module-path: infra/production
+      apply-environment: production
+      s3-cache-bucket: pep-terraform-build-cache
+    secrets:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      ENV_VARS: TF_VAR_github_private_key=${{ secrets.GH_PRIVATE_KEY}}

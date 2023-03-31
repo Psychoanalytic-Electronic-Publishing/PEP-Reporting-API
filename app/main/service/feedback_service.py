@@ -1,6 +1,6 @@
 from .base.base_service import BaseService
-from app.main.helpers.github_helper import GitHubHelper
-from app.main.config import Config
+from main.helpers.github_helper import GitHubHelper
+from main.config import Config
 
 
 class FeedbackService(BaseService):
@@ -9,7 +9,7 @@ class FeedbackService(BaseService):
         resp = GitHubHelper.create_issue(
             get_formatted_issue_subject(data),
             get_formatted_issue_body(data),
-            Config.GITHUB_ASSIGNEES_FEEDBACK
+            Config.GITHUB_ASSIGNEES
         )
         data['id'] = resp.number
         return {"data": data, "includes": []}

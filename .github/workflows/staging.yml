@@ -1,0 +1,57 @@
+name: Plan and deploy infrastructure
+
+on:
+  pull_request:
+    branches:
+      - master
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  env:
+    name: "Setup dynamic environment variables"
+    runs-on: ubuntu-latest
+    environment: staging-vars
+    outputs:
+      data_error_assignees: ${{ steps.set-outputs.outputs.data_error_assignees}}
+      feedback_assignees: ${{ steps.set-outputs.outputs.feedback_assignees}}
+      labels: ${{ steps.set-outputs.outputs.labels}}
+      app_id: ${{ steps.set-outputs.outputs.app_id}}
+      installation_id: ${{ steps.set-outputs.outputs.installation_id}}
+      owner: ${{ steps.set-outputs.outputs.owner}}
+      repo: ${{ steps.set-outputs.outputs.repo}}
+      cors_origin: ${{ steps.set-outputs.outputs.cors_origin}}
+    steps:
+      - name: Set output
+        id: set-outputs
+        run: |
+          echo "data_error_assignees=${{ vars.DATA_ERROR_ASSIGNEES }}" >> $GITHUB_OUTPUT
+          echo "feedback_assignees=${{ vars.FEEDBACK_ASSIGNEES }}" >> $GITHUB_OUTPUT
+          echo "labels=${{ vars.LABELS }}" >> $GITHUB_OUTPUT
+          echo "app_id=${{ vars.APP_ID }}" >> $GITHUB_OUTPUT
+          echo "installation_id=${{ vars.INSTALLATION_ID }}" >> $GITHUB_OUTPUT
+          echo "owner=${{ vars.OWNER }}" >> $GITHUB_OUTPUT
+          echo "repo=${{ vars.REPO }}" >> $GITHUB_OUTPUT
+          echo "cors_origin=${{ vars.CORS_ORIGIN }}" >> $GITHUB_OUTPUT
+
+  infrastructure:
+    needs: [env]
+    uses: jordanallen-dev/reusable-terraform-workflow/.github/workflows/terraform.yml@main
+    with:
+      module-path: infra/staging
+      apply-environment: staging
+      s3-cache-bucket: pep-terraform-build-cache
+    secrets:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      ENV_VARS: "TF_VAR_github_private_key=${{ secrets.GH_PRIVATE_KEY}}\n\
+        TF_VAR_github_assignees_data_error=${{ needs.env.outputs.data_error_assignees }}\n\
+        TF_VAR_github_assignees_feedback=${{ needs.env.outputs.feedback_assignees }}\n\
+        TF_VAR_github_labels=${{ needs.env.outputs.labels }}\n\
+        TF_VAR_github_app_id=${{ needs.env.outputs.app_id }}\n\
+        TF_VAR_github_installation_id=${{ needs.env.outputs.installation_id }}\n\
+        TF_VAR_github_owner=${{ needs.env.outputs.owner }}\n\
+        TF_VAR_github_repo=${{ needs.env.outputs.repo }}\n\
+        TF_VAR_cors_origin=${{ needs.env.outputs.cors_origin }}"

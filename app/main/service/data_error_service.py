@@ -1,7 +1,7 @@
 from .base.base_service import BaseService
-from app.main.config import Config
-from app.main.helpers.github_helper import GitHubHelper
-from app.main.config import Config
+from main.config import Config
+from main.helpers.github_helper import GitHubHelper
+from main.config import Config
 
 
 class DataErrorService(BaseService):
@@ -10,7 +10,7 @@ class DataErrorService(BaseService):
         resp = GitHubHelper.create_issue(
             get_formatted_issue_subject(data),
             get_formatted_issue_body(data),
-            Config.GITHUB_ASSIGNEES_DATAERROR
+            Config.GITHUB_ASSIGNEES
         )
         data['id'] = resp.number
         return {"data": data, "includes": []}

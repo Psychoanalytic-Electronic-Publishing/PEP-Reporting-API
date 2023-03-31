@@ -3,10 +3,10 @@ from pytest import fixture
 from typing import List
 from unittest.mock import patch
 from unittest.mock import Mock
-from app.main.service.data_error_service import DataErrorService
-from app.main.service.data_error_service import get_formatted_issue_body, get_formatted_issue_subject
-from app.main.schema.data_error_schema import DataErrorSchema
-from app.main.helpers.github_helper import GitHubHelper
+from main.service.data_error_service import DataErrorService
+from main.service.data_error_service import get_formatted_issue_body, get_formatted_issue_subject
+from main.schema.data_error_schema import DataErrorSchema
+from main.helpers.github_helper import GitHubHelper
 
 schema = DataErrorSchema()
 data_error = schema.load(
