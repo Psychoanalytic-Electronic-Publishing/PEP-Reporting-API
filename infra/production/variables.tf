@@ -15,17 +15,14 @@ variable "stack_name" {
 
 variable "github_assignees_data_error" {
   description = "Github assignees for data error issues"
-  default     = "jordanallen-dev"
 }
 
 variable "github_assignees_feedback" {
   description = "Github assignees for feedback issues"
-  default     = "jordanallen-dev"
 }
 
 variable "github_labels" {
   description = "Github labels for issues"
-  default     = "Client User Issue Reported"
 }
 
 variable "github_private_key" {
@@ -35,22 +32,18 @@ variable "github_private_key" {
 
 variable "github_app_id" {
   description = "Github app id"
-  default     = 306306
 }
 
 variable "github_installation_id" {
   description = "Github installation id"
-  default     = 35322311
 }
 
 variable "github_owner" {
   description = "Github owner"
-  default     = "Psychoanalytic-Electronic-Publishing"
 }
 
 variable "github_repo" {
   description = "Github repo for issues"
-  default     = "pep-reporting-api"
 }
 
 variable "root_domain" {
@@ -60,7 +53,6 @@ variable "root_domain" {
 
 variable "cors_origin" {
   description = "CORS origin"
-  default     = "https://pep-web.org"
 }
 
 variable "api_domain" {
