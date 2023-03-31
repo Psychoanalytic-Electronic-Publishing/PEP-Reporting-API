@@ -79,7 +79,7 @@ module "feedback_lambda" {
     "GITHUB_PRIVATE_KEY"     = var.github_private_key
     "GITHUB_APP_ID"          = var.github_app_id
     "GITHUB_INSTALLATION_ID" = var.github_installation_id
-    "CORS_ORIGIN"            = var.cors_origin
+    "CORS_ORIGINS"           = var.cors_origin
   }
 }
 
