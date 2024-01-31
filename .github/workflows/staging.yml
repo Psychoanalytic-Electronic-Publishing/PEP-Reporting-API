@@ -3,7 +3,7 @@ name: Plan and deploy infrastructure for staging
 on:
   pull_request:
     branches:
-      - master
+      - Stage
 
 concurrency:
   group: ${{ github.ref }}
